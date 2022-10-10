@@ -78,4 +78,6 @@ vim.o.pumheight = 10
 vim.o.showtabline = 2
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
+vim.opt.undofile = true                       -- enable persistent undo
+vim.opt.updatetime = 300                        -- faster completion (4000ms default)
