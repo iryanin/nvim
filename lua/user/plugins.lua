@@ -89,8 +89,8 @@ return packer.startup(function(use)
 	use("onsails/lspkind.nvim")
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter")
-	use("Pocco81/auto-save.nvim")
 	use("p00f/nvim-ts-rainbow")
+	use("Pocco81/auto-save.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

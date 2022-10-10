@@ -136,7 +136,7 @@ map("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 
 --lsp
 --outline
-map("n","<leader>o", "<cmd>LSoutlineToggle<CR>",opts)
+map("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
 -- map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
 -- code action
@@ -157,7 +157,7 @@ map("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
 map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 -- map("n", "gj", ":lua vim.diagnostic.goto_next()<CR>", opts)
 map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-map("n", "<leader>f", ":lua vim.lsp.buf.formatting()<CR>", opts)
+map("n", "<leader>f", ":lua vim.lsp.buf.format({async=true})<CR>", opts)
 --autosave
 map("n", "<leader>n", ":ASToggle<CR>", opts)
 
