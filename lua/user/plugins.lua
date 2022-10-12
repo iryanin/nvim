@@ -90,6 +90,10 @@ return packer.startup(function(use)
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter")
 	use("p00f/nvim-ts-rainbow")
+
+	use("phaazon/hop.nvim")
+	-- use("akinsho/toggleterm.nvim")
+	use("rcarriga/nvim-notify")
 	use("Pocco81/auto-save.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
