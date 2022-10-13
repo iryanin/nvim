@@ -96,7 +96,9 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-notify")
 	use("Pocco81/auto-save.nvim")
 
-	use("nvim-telescope/telescope-ui-select.nvim")
+	-- use("nvim-telescope/telescope-ui-select.nvim")
+	use("simrat39/symbols-outline.nvim")
+	use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

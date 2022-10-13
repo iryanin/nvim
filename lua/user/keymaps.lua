@@ -136,7 +136,7 @@ map("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 
 --lsp
 --outline
--- map("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
+map("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts)
 map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 -- map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
 -- code action
