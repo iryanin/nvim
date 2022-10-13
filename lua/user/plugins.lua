@@ -82,7 +82,7 @@ return packer.startup(function(use)
 	use("mfussenegger/nvim-dap")
 	use("theHamsta/nvim-dap-virtual-text")
 	use("rcarriga/nvim-dap-ui")
-	--use("nvim-telescope/telescope-dap.nvim")
+	use("nvim-telescope/telescope-dap.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
@@ -96,6 +96,7 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-notify")
 	use("Pocco81/auto-save.nvim")
 
+	use("nvim-telescope/telescope-ui-select.nvim")
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
