@@ -68,25 +68,6 @@ lspkind.init({
 	},
 })
 
-local saga = require("lspsaga")
-saga.init_lsp_saga({
-  finder_action_keys = {
-    -- open = "o",
-    open = "<CR>",
-    vsplit = "s",
-    split = "i",
-    -- quit = "q",
-    quit = "<ESC>",
-    scroll_down = "<C-f>",
-    scroll_up = "<C-b>",
-  },
-  code_action_keys = {
-    -- quit = "q",
-    quit = "<ESC>",
-    exec = "<CR>",
-  },
-  rename_action_quit = "<ESC>",
-})
 local M = {}
 -- 为 cmp.lua 提供参数格式
 M.formatting = {

@@ -77,7 +77,7 @@ return packer.startup(function(use)
 	--use("williamboman/mason.nvim")
 	--use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-	use("glepnir/lspsaga.nvim")
+	-- use("glepnir/lspsaga.nvim")
 	--DAP
 	use("mfussenegger/nvim-dap")
 	use("theHamsta/nvim-dap-virtual-text")

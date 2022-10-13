@@ -4,16 +4,16 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
+-- telescope.load_extension("ui-select")
+telescope.load_extension("dap")
 
 telescope.setup({
 	defaults = {
 		mappings = require("user.keymaps").telescopeList,
 	},
-	extensions = {
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
-	},
+	-- extensions = {
+	-- 	["ui-select"] = {
+	-- 		require("telescope.themes").get_dropdown{},
+	-- 	},
+	-- },
 })
-require("telescope").load_extension("ui-select")
-require("telescope").load_extension("dap")
