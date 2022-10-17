@@ -29,7 +29,7 @@ cmp.setup({
 	},
 	-- 补全源
 	sources = cmp.config.sources({
-    { name = 'cmp_tabnine' },
+		{ name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
 		-- For vsnip users.
 		--{ name = "vsnip" },

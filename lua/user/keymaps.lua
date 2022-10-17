@@ -232,9 +232,9 @@ pluginKeys.cmp = function(cmp)
 	local cmp = require("cmp")
 	return {
 		-- 出现补全
-		["<A-.>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 		-- 取消
-		["<A-,>"] = cmp.mapping({
+		["<C-e>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
 		}),
@@ -250,11 +250,24 @@ pluginKeys.cmp = function(cmp)
 		-- 如果窗口内容太多，可以滚动
 		["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+		-- 自定义代码段跳转到下一个参数
+		["<C-l>"] = cmp.mapping(function(_)
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			end
+		end, { "i", "s" }),
+
+		-- 自定义代码段跳转到上一个参数
+		["<C-h>"] = cmp.mapping(function()
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			end
+		end, { "i", "s" }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
+				-- elseif luasnip.expand_or_jumpable() then
+				-- luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -265,8 +278,8 @@ pluginKeys.cmp = function(cmp)
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+				-- elseif luasnip.jumpable(-1) then
+				-- luasnip.jump(-1)
 			else
 				fallback()
 			end
