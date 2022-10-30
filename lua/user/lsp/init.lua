@@ -4,5 +4,5 @@ if not status_ok then
 end
 
 require("user.lsp.ui")
-require "user.lsp.null-ls"
-require "user.lsp.config"
+require("user.lsp.null-ls")
+require("user.lsp.config")

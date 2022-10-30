@@ -3,8 +3,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local opts = {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 }
 
 -- 本地变量
@@ -164,212 +164,212 @@ map("n", "<leader>n", ":ASToggle<CR>", opts)
 local pluginKeys = {}
 
 pluginKeys.nvimTreeList = { -- 打开文件或文件夹
-	{ key = { "o", "<CR>", "<2-LeftMouse>" }, action = "edit" },
-	-- v分屏打开文件
-	{ key = "v", action = "vsplit" },
-	-- h分屏打开文件
-	{ key = "h", action = "split" },
-	-- Ignore (node_modules)
-	{ key = "I", action = "toggle_ignored" },
-	-- Hide (dotfiles)
-	{ key = ".", action = "toggle_dotfiles" },
-	{ key = "R", action = "refresh" },
-	-- 文件操作
-	{ key = "n", action = "create" },
-	{ key = "d", action = "remove" },
-	{ key = "r", action = "rename" },
-	{ key = "x", action = "cut" },
-	{ key = "c", action = "copy" },
-	{ key = "p", action = "paste" },
-	{ key = "y", action = "copy_name" },
-	{ key = "Y", action = "copy_path" },
-	{ key = "gy", action = "copy_absolute_path" },
-	{ key = "i", action = "toggle_file_info" },
-	-- 进入下一级
-	{ key = { "]" }, action = "cd" },
-	-- 进入上一级
-	{ key = { "[" }, action = "dir_up" },
+  { key = { "o", "<CR>", "<2-LeftMouse>" }, action = "edit" },
+  -- v分屏打开文件
+  { key = "v", action = "vsplit" },
+  -- h分屏打开文件
+  { key = "h", action = "split" },
+  -- Ignore (node_modules)
+  { key = "I", action = "toggle_ignored" },
+  -- Hide (dotfiles)
+  { key = ".", action = "toggle_dotfiles" },
+  { key = "R", action = "refresh" },
+  -- 文件操作
+  { key = "n", action = "create" },
+  { key = "d", action = "remove" },
+  { key = "r", action = "rename" },
+  { key = "x", action = "cut" },
+  { key = "c", action = "copy" },
+  { key = "p", action = "paste" },
+  { key = "y", action = "copy_name" },
+  { key = "Y", action = "copy_path" },
+  { key = "gy", action = "copy_absolute_path" },
+  { key = "i", action = "toggle_file_info" },
+  -- 进入下一级
+  { key = { "]" }, action = "cd" },
+  -- 进入上一级
+  { key = { "[" }, action = "dir_up" },
 }
 pluginKeys.telescopeList = {
-	i = {
-		-- 上下移动
-		["<C-j>"] = "move_selection_next",
-		["<C-k>"] = "move_selection_previous",
-		["<C-n>"] = "move_selection_next",
-		["<C-p>"] = "move_selection_previous",
-		-- 历史记录
-		["<Down>"] = "cycle_history_next",
-		["<Up>"] = "cycle_history_prev",
-		-- 关闭窗口
-		-- ["<esc>"] = actions.close,
-		["<C-c>"] = "close",
-		-- 预览窗口上下滚动
-		["<C-u>"] = "preview_scrolling_up",
-		["<C-d>"] = "preview_scrolling_down",
-	},
+  i = {
+    -- 上下移动
+    ["<C-j>"] = "move_selection_next",
+    ["<C-k>"] = "move_selection_previous",
+    ["<C-n>"] = "move_selection_next",
+    ["<C-p>"] = "move_selection_previous",
+    -- 历史记录
+    ["<Down>"] = "cycle_history_next",
+    ["<Up>"] = "cycle_history_prev",
+    -- 关闭窗口
+    -- ["<esc>"] = actions.close,
+    ["<C-c>"] = "close",
+    -- 预览窗口上下滚动
+    ["<C-u>"] = "preview_scrolling_up",
+    ["<C-d>"] = "preview_scrolling_down",
+  },
 }
 -- 代码注释插件
 -- see ./lua/plugin-config/comment.lua
 pluginKeys.comment = {
-	-- Normal 模式快捷键
-	toggler = {
-		line = "gcc", -- 行注释
-		block = "gbc", -- 块注释
-	},
-	-- Visual 模式
-	opleader = {
-		line = "gc",
-		bock = "gb",
-	},
+  -- Normal 模式快捷键
+  toggler = {
+    line = "gcc", -- 行注释
+    block = "gbc", -- 块注释
+  },
+  -- Visual 模式
+  opleader = {
+    line = "gc",
+    bock = "gb",
+  },
 }
 -- nvim-cmp 自动补全
 pluginKeys.cmp = function(cmp)
-	local has_words_before = function()
-		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-	end
-	local luasnip = require("luasnip")
-	local cmp = require("cmp")
-	return {
-		-- 出现补全
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		-- 取消
-		["<C-e>"] = cmp.mapping({
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close(),
-		}),
-		-- 上一个
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		-- 下一个
-		["<C-j>"] = cmp.mapping.select_next_item(),
-		-- 确认
-		["<CR>"] = cmp.mapping.confirm({
-			select = false,
-			behavior = cmp.ConfirmBehavior.Replace,
-		}),
-		-- 如果窗口内容太多，可以滚动
-		["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-		-- 自定义代码段跳转到下一个参数
-		["<C-l>"] = cmp.mapping(function(_)
-			if luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			end
-		end, { "i", "s" }),
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+  local luasnip = require("luasnip")
+  local cmp = require("cmp")
+  return {
+    -- 出现补全
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    -- 取消
+    ["<C-e>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    -- 上一个
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    -- 下一个
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    -- 确认
+    ["<CR>"] = cmp.mapping.confirm({
+      select = false,
+      behavior = cmp.ConfirmBehavior.Replace,
+    }),
+    -- 如果窗口内容太多，可以滚动
+    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    -- 自定义代码段跳转到下一个参数
+    ["<C-l>"] = cmp.mapping(function(_)
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      end
+    end, { "i", "s" }),
 
-		-- 自定义代码段跳转到上一个参数
-		["<C-h>"] = cmp.mapping(function()
-			if luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			end
-		end, { "i", "s" }),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-				-- elseif luasnip.expand_or_jumpable() then
-				-- luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+    -- 自定义代码段跳转到上一个参数
+    ["<C-h>"] = cmp.mapping(function()
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      end
+    end, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+        -- elseif luasnip.expand_or_jumpable() then
+        -- luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
 
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-				-- elseif luasnip.jumpable(-1) then
-				-- luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+        -- elseif luasnip.jumpable(-1) then
+        -- luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }
 end
 
 -- nvim-dap
 pluginKeys.mapDAP = function()
-	map(
-		"n",
-		"<leader>de",
-		":lua require'dap'.close()<CR>"
-			.. ":lua require'dap'.terminate()<CR>"
-			.. ":lua require'dap.repl'.close()<CR>"
-			.. ":lua require'dapui'.close()<CR>"
-			.. ":lua require('dap').clear_breakpoints()<CR>"
-			.. "<C-w>o<CR>",
-		opts
-	)
-	-- 继续
-	map("n", "<leader>dc", ":lua require'dap'.continue()<CR>", opts)
-	-- 设置断点
-	map(
-		"n",
-		"<leader>dt",
-		":lua require('dap').toggle_breakpoint();require'user.dap.util'.store_breakpoints(true)<CR>",
-		opts
-	)
-	map(
-		"n",
-		"<leader>dT",
-		":lua require('dap').clear_breakpoints();require'user.dap.util'.store_breakpoints(true)<CR>",
-		opts
-	)
-	--  stepOver, stepOut, stepInto
-	map("n", "<leader>dj", ":lua require'dap'.step_over()<CR>", opts)
-	map("n", "<leader>dk", ":lua require'dap'.step_out()<CR>", opts)
-	map("n", "<leader>dl", ":lua require'dap'.step_into()<CR>", opts)
-	-- 弹窗
-	map("n", "<leader>dh", ":lua require'dapui'.eval()<CR>", opts)
+  map(
+    "n",
+    "<leader>de",
+    ":lua require'dap'.close()<CR>"
+    .. ":lua require'dap'.terminate()<CR>"
+    .. ":lua require'dap.repl'.close()<CR>"
+    .. ":lua require'dapui'.close()<CR>"
+    .. ":lua require('dap').clear_breakpoints()<CR>"
+    .. "<C-w>o<CR>",
+    opts
+  )
+  -- 继续
+  map("n", "<leader>dc", ":lua require'dap'.continue()<CR>", opts)
+  -- 设置断点
+  map(
+    "n",
+    "<leader>dt",
+    ":lua require('dap').toggle_breakpoint();require'user.dap.util'.store_breakpoints(true)<CR>",
+    opts
+  )
+  map(
+    "n",
+    "<leader>dT",
+    ":lua require('dap').clear_breakpoints();require'user.dap.util'.store_breakpoints(true)<CR>",
+    opts
+  )
+  --  stepOver, stepOut, stepInto
+  map("n", "<leader>dj", ":lua require'dap'.step_over()<CR>", opts)
+  map("n", "<leader>dk", ":lua require'dap'.step_out()<CR>", opts)
+  map("n", "<leader>dl", ":lua require'dap'.step_into()<CR>", opts)
+  -- 弹窗
+  map("n", "<leader>dh", ":lua require'dapui'.eval()<CR>", opts)
 end
 -- gitsigns
 pluginKeys.gitsigns_on_attach = function(bufnr)
-	local gs = package.loaded.gitsigns
+  local gs = package.loaded.gitsigns
 
-	local function map(mode, l, r, opts)
-		opts = opts or {}
-		opts.buffer = bufnr
-		vim.keymap.set(mode, l, r, opts)
-	end
+  local function map(mode, l, r, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, l, r, opts)
+  end
 
-	-- Navigation
-	map("n", "<leader>gj", function()
-		if vim.wo.diff then
-			return "]c"
-		end
-		vim.schedule(function()
-			gs.next_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true })
+  -- Navigation
+  map("n", "<leader>gj", function()
+    if vim.wo.diff then
+      return "]c"
+    end
+    vim.schedule(function()
+      gs.next_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true })
 
-	map("n", "<leader>gk", function()
-		if vim.wo.diff then
-			return "[c"
-		end
-		vim.schedule(function()
-			gs.prev_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true })
+  map("n", "<leader>gk", function()
+    if vim.wo.diff then
+      return "[c"
+    end
+    vim.schedule(function()
+      gs.prev_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true })
 
-	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
-	map("n", "<leader>gS", gs.stage_buffer)
-	map("n", "<leader>gu", gs.undo_stage_hunk)
-	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
-	map("n", "<leader>gR", gs.reset_buffer)
-	map("n", "<leader>gp", gs.preview_hunk)
-	map("n", "<leader>gb", function()
-		gs.blame_line({ full = true })
-	end)
-	map("n", "<leader>gd", gs.diffthis)
-	map("n", "<leader>gD", function()
-		gs.diffthis("~")
-	end)
-	-- toggle
-	map("n", "<leader>gtd", gs.toggle_deleted)
-	map("n", "<leader>gtb", gs.toggle_current_line_blame)
-	-- Text object
-	map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
+  map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
+  map("n", "<leader>gS", gs.stage_buffer)
+  map("n", "<leader>gu", gs.undo_stage_hunk)
+  map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
+  map("n", "<leader>gR", gs.reset_buffer)
+  map("n", "<leader>gp", gs.preview_hunk)
+  map("n", "<leader>gb", function()
+    gs.blame_line({ full = true })
+  end)
+  map("n", "<leader>gd", gs.diffthis)
+  map("n", "<leader>gD", function()
+    gs.diffthis("~")
+  end)
+  -- toggle
+  map("n", "<leader>gtd", gs.toggle_deleted)
+  map("n", "<leader>gtb", gs.toggle_current_line_blame)
+  -- Text object
+  map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
 end
 return pluginKeys

@@ -1,13 +1,13 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
-	return
+  return
 end
 
 local list_keys = require("user.keymaps").nvimTreeList
 
-nvim_tree.setup{
+nvim_tree.setup({
   disable_netrw = true,
-view = {
+  view = {
     -- 宽度
     width = 34,
     -- 也可以 'right'
@@ -23,4 +23,5 @@ view = {
     -- 显示图标
     signcolumn = "yes",
   },
-}
+})
+

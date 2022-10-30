@@ -31,15 +31,15 @@ require("lspconfig").texlab.setup({
         args = { "-pdf", "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
         forwardSearchAfter = false,
-        onSave = false,
+        onSave = true,
       },
       forwardSearch = {
         executable = "evince",
         args = { "%p" },
       },
       chktex = {
-        onEdit = false,
-        onOpenAndSave = false,
+        onEdit = true,
+        onOpenAndSave = true,
       },
       diagnosticsDelay = 300,
       formatterLineLength = 80,
