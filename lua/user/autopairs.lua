@@ -12,6 +12,8 @@ npairs.setup({
     java = false,
   },
   disable_filetype = { "TelescopePrompt", "spectre_panel" },
+  ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
+  enable_check_bracket_line = false,
   fast_wrap = {
     map = "<M-e>",
     chars = { "{", "[", "(", '"', "'" },
@@ -29,5 +31,5 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
 end
-local cmp = require("cmp")
+-- local cmp = require("cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
