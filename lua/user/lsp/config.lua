@@ -17,6 +17,21 @@ require("lspconfig")["clangd"].setup({
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
   flags = lsp_flags,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true,
+        diagnosticSeverityOverrides = {
+          reportGeneralTypeIssues = "none",
+          reportOptionalMemberAccess = "none",
+          reportOptionalSubscript = "none",
+          reportPrivateImportUsage = "none",
+        },
+      },
+    },
+  },
 })
 require("lspconfig").texlab.setup({
   cmd = { "texlab" },

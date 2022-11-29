@@ -20,6 +20,7 @@ map("n", "g_", "$", opts)
 map("c", "<C-j>", "<C-n>", { noremap = false })
 map("c", "<C-k>", "<C-p>", { noremap = false })
 
+map("n", "<leader>w", ":w<CR>", opts)
 map("n", "<leader>ww", ":wa<CR>", opts)
 map("n", "<leader>wq", ":wqa<CR>", opts)
 
@@ -62,49 +63,49 @@ map("n", "<leader>q", ":q<CR>", opts)
 -- windows 分屏快捷键
 ------------------------------------------------------------------
 -- 取消 s 默认功能
-map("n", "s", "", opts)
-map("n", "sv", ":vsp<CR>", opts)
-map("n", "sh", ":sp<CR>", opts)
+-- map("n", "s", "", opts)
+map("n", ",v", ":vsp<CR>", opts)
+map("n", ",h", ":sp<CR>", opts)
 -- 关闭当前
-map("n", "sc", "<C-w>c", opts)
+map("n", ",c", "<C-w>c", opts)
 -- 关闭其他
-map("n", "so", "<C-w>o", opts) -- close others
+map("n", ",o", "<C-w>o", opts) -- close others
 -- alt + hjkl  窗口之间跳转
 --map("n", "<A-h>", "<C-w>h", opts)
 --map("n", "<A-j>", "<C-w>j", opts)
 --map("n", "<A-k>", "<C-w>k", opts)
 --map("n", "<A-l>", "<C-w>l", opts)
 -- <leader> + hjkl 窗口之间跳转
-map("n", "<leader>h", "<C-w>h", opts)
-map("n", "<leader>j", "<C-w>j", opts)
-map("n", "<leader>k", "<C-w>k", opts)
-map("n", "<leader>l", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-l>", "<C-w>l", opts)
 -- 左右比例控制
 -- map("n", "<A-h>", ":vertical resize -2<CR>", opts)
 -- map("n", "<A-l>", ":vertical resize +2<CR>", opts)
-map("n", "s,", ":vertical resize -10<CR>", opts)
-map("n", "s.", ":vertical resize +10<CR>", opts)
+-- map("n", "s,", ":vertical resize -10<CR>", opts)
+-- map("n", "s.", ":vertical resize +10<CR>", opts)
 -- 上下比例
-map("n", "sj", ":resize +10<CR>", opts)
-map("n", "sk", ":resize -10<CR>", opts)
+-- map("n", "sj", ":resize +10<CR>", opts)
+-- map("n", "sk", ":resize -10<CR>", opts)
 -- map("n", "<A-k>", ":resize +2<CR>", opts)
 -- map("n", "<A-j>", ":resize -2<CR>", opts)
 -- 相等比例
-map("n", "s=", "<C-w>=", opts)
+map("n", ",=", "<C-w>=", opts)
 
 -- Terminal相关
-map("n", "st", ":sp | terminal<CR>", opts)
-map("n", "stv", ":vsp | terminal<CR>", opts)
+-- map("n", "st", ":sp | terminal<CR>", opts)
+-- map("n", "stv", ":vsp | terminal<CR>", opts)
 -- Esc 回 Normal 模式
-map("t", "<Esc>", "<C-\\><C-n>", opts)
-map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opts)
-map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opts)
-map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opts)
-map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opts)
-map("t", "<leader>h", [[ <C-\><C-N><C-w>h ]], opts)
-map("t", "<leader>j", [[ <C-\><C-N><C-w>j ]], opts)
-map("t", "<leader>k", [[ <C-\><C-N><C-w>k ]], opts)
-map("t", "<leader>l", [[ <C-\><C-N><C-w>l ]], opts)
+-- map("t", "<Esc>", "<C-\\><C-n>", opts)
+-- map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opts)
+-- map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opts)
+-- map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opts)
+-- map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opts)
+-- map("t", "<leader>h", [[ <C-\><C-N><C-w>h ]], opts)
+-- map("t", "<leader>j", [[ <C-\><C-N><C-w>j ]], opts)
+-- map("t", "<leader>k", [[ <C-\><C-N><C-w>k ]], opts)
+-- map("t", "<leader>l", [[ <C-\><C-N><C-w>l ]], opts)
 --------------------------------------------------------------------
 
 -- treesitter 折叠
@@ -117,8 +118,8 @@ map("n", "<leader>m", ":NvimTreeToggle<CR>", opts)
 
 -- bufferline
 -- 左右Tab切换
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opts)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opts)
+map("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
+map("n", "<leader>l", ":BufferLineCycleNext<CR>", opts)
 -- "moll/vim-bbye" 关闭当前 buffer
 map("n", "<leader>bc", ":bdelete!<CR>", opts)
 --map("n", "<C-w>", ":bdelete!<CR>", opts)
@@ -160,6 +161,8 @@ map("n", "gj", ":lua vim.diagnostic.goto_next()<CR>", opts)
 map("n", "<leader>f", ":lua vim.lsp.buf.format({async=true})<CR>", opts)
 --autosave
 map("n", "<leader>n", ":ASToggle<CR>", opts)
+--markdown-preview
+map("n", "<C-s>", ":MarkdownPreview<CR>", opts)
 
 local pluginKeys = {}
 

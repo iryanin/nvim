@@ -26,9 +26,9 @@ treesitter.setup({
 		-- },
 	},
 	-- 启用代码缩进模块 (=)
-	indent = {
-		enable = true,
-	},
+	-- indent = {
+	-- 	enable = true,
+	-- },
 	-- p00f/nvim-ts-rainbow
 	rainbow = {
 		enable = true,
