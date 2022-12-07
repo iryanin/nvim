@@ -38,15 +38,16 @@ require("lspconfig").texlab.setup({
   filetypes = { "tex", "plaintex", "bib" },
   settings = {
     texlab = {
+      rootDirectory = nil,
       build = {
         args = { "-pdf", "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
-        forwardSearchAfter = false,
+        forwardSearchAfter = true,
         onSave = true,
       },
       forwardSearch = {
-        executable = "evince",
-        args = { "%p" },
+        executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+        args = { "-g", "%l", "%p", "%f" },
       },
       chktex = {
         onEdit = true,
