@@ -38,10 +38,6 @@ require("lspconfig").texlab.setup({
   filetypes = { "tex", "plaintex", "bib" },
   settings = {
     texlab = {
-      -- rootDirectory = nil,
-      -- --      ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
-      -- build = _G.TeXMagicBuildConfig,
-      -- --      ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑
       build = {
         args = { "-pdf", "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
