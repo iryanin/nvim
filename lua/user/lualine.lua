@@ -7,7 +7,7 @@ lualine.setup({
   options = {
     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
     -- https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-    theme = "tokyonight",
+    theme = "onedark",
     -- 分割线
     component_separators = {
       left = "|",

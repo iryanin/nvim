@@ -5,7 +5,7 @@ if not status_ok then
 end
 local dap = require 'dap'
 require("dapui").setup({
-  icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+  -- icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },

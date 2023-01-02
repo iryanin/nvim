@@ -60,7 +60,8 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
   use("lewis6991/gitsigns.nvim")
   -- Colorschemes
-  use("folke/tokyonight.nvim")
+  -- use("folke/tokyonight.nvim")
+  use("navarasu/onedark.nvim")
 
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
