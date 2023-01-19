@@ -60,7 +60,7 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
   use("lewis6991/gitsigns.nvim")
   -- Colorschemes
-  -- use("folke/tokyonight.nvim")
+  use("folke/tokyonight.nvim")
   use("navarasu/onedark.nvim")
 
   -- cmp plugins
@@ -99,6 +99,7 @@ return packer.startup(function(use)
   -- use("akinsho/toggleterm.nvim")
   -- use("rcarriga/nvim-notify")
   use("Pocco81/auto-save.nvim")
+  use("mfussenegger/nvim-jdtls")
   -- use("ggandor/leap.nvim")
   -- use("tpope/vim-repeat")
   -- use("karb94/neoscroll.nvim")

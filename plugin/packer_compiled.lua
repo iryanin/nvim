@@ -199,6 +199,11 @@ _G.packer_plugins = {
     path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -263,6 +268,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   ["which-key.nvim"] = {
     loaded = true,
