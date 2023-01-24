@@ -1,11 +1,3 @@
-local colorscheme = "tokyonight"
--- tokyonight
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not status_ok then
-  vim.notify("colorscheme: " .. colorscheme .. " not found！")
-  return
-end
-
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
@@ -41,9 +33,5 @@ require("tokyonight").setup({
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors) end,
 })
-require('tokyonight').load()
 
--- require('onedark').setup {
---     style = 'dark'
--- }
--- require('onedark').load()
+vim.cmd [[colorscheme tokyonight]]

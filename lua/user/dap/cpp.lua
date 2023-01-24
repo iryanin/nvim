@@ -15,10 +15,10 @@ dap.configurations.cpp = {
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
-        args = function()
-            local input = vim.fn.input("Input args: ")
-            return require("user.dap.util").str2argtable(input)
-        end,
+    args = function()
+      local input = vim.fn.input("Input args: ")
+      return require("user.dap.util").str2argtable(input)
+    end,
 
     -- 💀
     -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
@@ -39,3 +39,4 @@ dap.configurations.cpp = {
 
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+

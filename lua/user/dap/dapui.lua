@@ -1,11 +1,17 @@
-local status_ok, dapui = pcall(require, 'dapui')
-if not status_ok then
+local dapui_status_ok, dapui = pcall(require, "dapui")
+if not dapui_status_ok then
   vim.notify("dapui not found")
   return
 end
-local dap = require 'dap'
-require("dapui").setup({
-  -- icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+
+local dap_status_ok, dap = pcall(require, "dap")
+if not dap_status_ok then
+  vim.notify("dap not found")
+  return
+end
+
+dapui.setup({
+  icons = { expanded = "", collapsed = "", current_frame = "" },
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },
@@ -15,9 +21,17 @@ require("dapui").setup({
     repl = "r",
     toggle = "t",
   },
+  -- Use this to override mappings for specific elements
+  element_mappings = {
+    -- Example:
+    -- stacks = {
+    --   open = "<CR>",
+    --   expand = "o",
+    -- }
+  },
   -- Expand lines larger than the window
   -- Requires >= 0.7
-  expand_lines = vim.fn.has("nvim-0.7"),
+  expand_lines = vim.fn.has("nvim-0.7") == 1,
   -- Layouts define sections of the screen to place windows.
   -- The position can be "left", "right", "top" or "bottom".
   -- The size specifies the height/width depending on position. It can be an Int
@@ -28,7 +42,7 @@ require("dapui").setup({
   layouts = {
     {
       elements = {
-      -- Elements can be strings or table with id and size keys.
+        -- Elements can be strings or table with id and size keys.
         { id = "scopes", size = 0.25 },
         "breakpoints",
         "stacks",
@@ -39,11 +53,27 @@ require("dapui").setup({
     },
     {
       elements = {
-         { id = "repl", size = 0.5 },
-         { id = "console", size = 0.5 },
+        "repl",
+        "console",
       },
       size = 0.25, -- 25% of total lines
       position = "bottom",
+    },
+  },
+  controls = {
+    -- Requires Neovim nightly (or 0.8 when released)
+    enabled = true,
+    -- Display controls in this element
+    element = "repl",
+    icons = {
+      pause = "",
+      play = "",
+      step_into = "",
+      step_over = "",
+      step_out = "",
+      step_back = "",
+      run_last = "",
+      terminate = "",
     },
   },
   floating = {
@@ -60,6 +90,7 @@ require("dapui").setup({
     max_value_lines = 100, -- Can be integer or nil.
   }
 })
+
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()

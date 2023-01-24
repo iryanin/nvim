@@ -3,17 +3,20 @@ if not status_ok then
   return
 end
 
-local actions = require("telescope.actions")
--- telescope.load_extension("ui-select")
 telescope.load_extension("dap")
+telescope.load_extension('projects')
 
 telescope.setup({
   defaults = {
-    mappings = require("user.keymaps").telescopeList,
+    mappings = {
+      i = {
+        ["<C-n>"] = "move_selection_next",
+        ["<C-p>"] = "move_selection_previous",
+        ["<Down>"] = "cycle_history_next",
+        ["<Up>"] = "cycle_history_prev",
+        ["<C-u>"] = "preview_scrolling_up",
+        ["<C-d>"] = "preview_scrolling_down",
+      },
+    },
   },
-  -- extensions = {
-  -- 	["ui-select"] = {
-  -- 		require("telescope.themes").get_dropdown{},
-  -- 	},
-  -- },
 })

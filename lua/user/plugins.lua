@@ -46,9 +46,8 @@ return packer.startup(function(use)
   use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
   use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
   use("numToStr/Comment.nvim")
-  use("ThePrimeagen/refactoring.nvim")
+  use 'nvim-treesitter/nvim-treesitter-context'
   use("stevearc/dressing.nvim")
-  --use("JoosepAlviste/nvim-ts-context-commentstring")
   use("kyazdani42/nvim-web-devicons")
   use("kyazdani42/nvim-tree.lua")
   use("akinsho/bufferline.nvim")
@@ -61,7 +60,6 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim")
   -- Colorschemes
   use("folke/tokyonight.nvim")
-  use("navarasu/onedark.nvim")
 
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -77,10 +75,7 @@ return packer.startup(function(use)
 
   -- LSP
   use("neovim/nvim-lspconfig") -- enable LSP
-  --use("williamboman/mason.nvim")
-  --use("williamboman/mason-lspconfig.nvim")
-  use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-  -- use("glepnir/lspsaga.nvim")
+  -- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
   --DAP
   use("mfussenegger/nvim-dap")
   use("theHamsta/nvim-dap-virtual-text")
@@ -97,14 +92,17 @@ return packer.startup(function(use)
 
   -- use("phaazon/hop.nvim")
   -- use("akinsho/toggleterm.nvim")
-  -- use("rcarriga/nvim-notify")
   use("Pocco81/auto-save.nvim")
-  use("mfussenegger/nvim-jdtls")
+  -- use({ "michaelb/sniprun", run = "zsh ./install.sh" })
+  use({ "CRAG666/code_runner.nvim" })
+  -- use { 'fgheng/winbar.nvim' }
+  -- use("mfussenegger/nvim-jdtls")
   -- use("ggandor/leap.nvim")
   -- use("tpope/vim-repeat")
+  use { "SmiteshP/nvim-navic" }
+  use { 'arkav/lualine-lsp-progress' }
+
   -- use("karb94/neoscroll.nvim")
-  -- use("kdheepak/cmp-latex-symbols")
-  -- install without yarn or npm
   use({
     "iamcco/markdown-preview.nvim",
     run = function()
@@ -114,7 +112,7 @@ return packer.startup(function(use)
 
   -- use("nvim-telescope/telescope-ui-select.nvim")
   use("simrat39/symbols-outline.nvim")
-  use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+  use({ "tzachar/cmp-tabnine", run = "./install.sh" })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

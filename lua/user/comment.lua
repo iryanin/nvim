@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local default_opts = {
+comment.setup({
   ---Add a space b/w comment and the line
   padding = true,
   ---Whether the cursor should stay at its position
@@ -39,14 +39,10 @@ local default_opts = {
     ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
     basic = true,
     ---Extra mapping; `gco`, `gcO`, `gcA`
-    extra = false,
-    ---Extended mapping; `g>` `g<` `g>[count]{motion}` `g<[count]{motion}`
-    extended = false,
+    extra = true,
   },
   ---Function to call before (un)comment
   pre_hook = nil,
   ---Function to call after (un)comment
   post_hook = nil,
-}
-
-comment.setup(vim.tbl_deep_extend("force", default_opts, require("user.keymaps").comment))
+})

@@ -7,9 +7,10 @@ local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
 end
-local cmp = require("cmp")
+
 local lspkind = require("lspkind")
 require("luasnip.loaders.from_vscode").lazy_load()
+
 local source_mapping = {
   buffer = "[Buffer]",
   nvim_lsp = "[LSP]",
@@ -18,39 +19,28 @@ local source_mapping = {
   path = "[Path]",
 }
 local compare = require("cmp.config.compare")
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 cmp.setup({
-  -- 指定 snippet 引擎
+  view = {
+    entries = { name = 'custom', selection_order = 'near_cursor' }
+  },
   snippet = {
     expand = function(args)
-      -- For `vsnip` users.
-      -- vim.fn["vsnip#anonymous"](args.body)
-
       -- For `luasnip` users.
       require("luasnip").lsp_expand(args.body)
-
-      -- For `ultisnips` users.
-      -- vim.fn["UltiSnips#Anon"](args.body)
-
-      -- For `snippy` users.
-      -- require'snippy'.expand_snippet(args.body)
     end,
   },
-  -- 补全源
   sources = cmp.config.sources({
     { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
-    -- For vsnip users.
-    --{ name = "vsnip" },
-
     -- For luasnip users.
     { name = "luasnip" },
-
-    --For ultisnips users.
-    -- { name = 'ultisnips' },
-
-    -- -- For snippy users.
-    -- { name = 'snippy' },
   }, { { name = "buffer" }, { name = "path" } }),
   sorting = {
     priority_weight = 2,
@@ -65,17 +55,19 @@ cmp.setup({
       compare.length,
       compare.order,
     },
-    -- formatting = {
-    -- 	format = lspkind.cmp_format({
-    -- 		mode = "symbol", -- show only symbol annotations
-    -- 		maxwidth = 50,
-    -- 		before = function(entry, vim_item)
-    -- 			vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
-    -- 			return vim_item
-    -- 		end,
-    -- 	}),
   },
+
+  -- formatting = {
+  -- 	format = lspkind.cmp_format({
+  -- 		mode = "symbol", -- show only symbol annotations
+  -- 		maxwidth = 50,
+  -- 		before = function(entry, vim_item)
+  -- 			vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+  -- 			return vim_item
+  -- 		end,
+  -- 	}),
   formatting = {
+    -- fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- if you have lspkind installed, you can use it like
       -- in the following line:
@@ -97,24 +89,64 @@ cmp.setup({
       return vim_item
     end,
   },
-  -- 快捷键设置
-  mapping = require("user.keymaps").cmp(cmp),
-})
 
--- / 查找模式使用 buffer 源
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
+  mapping = {
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+
+    ['<C-e>'] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+
+    ["<CR>"] = cmp.mapping.confirm({
+      select = false,
+      behavior = cmp.ConfirmBehavior.Replace,
+    }),
+
+    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
   },
 })
 
--- : 命令行模式中使用 path 和 cmdline 源.
-cmp.setup.cmdline(":", {
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = "path" },
+    { name = 'path' }
   }, {
-    { name = "cmdline" },
-  }),
+    { name = 'cmdline' }
+  })
 })
+
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)

@@ -9,17 +9,18 @@ dap.adapters.python = {
 }
 
 dap.configurations.python = {
-    {
-        type = "python",
-        request = "launch",
-        name = "Launch file",
-        program = "${file}",
-        args = function()
-            local input = vim.fn.input("Input args: ")
-            return require("user.dap.util").str2argtable(input)
-        end,
-        pythonPath = function()
-            return "/usr/bin/python3"
-        end
-    }
+  {
+    type = "python",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+    args = function()
+      local input = vim.fn.input("Input args: ")
+      return require("user.dap.util").str2argtable(input)
+    end,
+    pythonPath = function()
+      return "/usr/bin/python3"
+    end
+  }
 }
+
