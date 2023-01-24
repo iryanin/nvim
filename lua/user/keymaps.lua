@@ -29,8 +29,10 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 -- map("v", "<C-j>", "5j", opts)
 -- map("v", "<C-k>", "5k", opts)
 -- ctrl u / ctrl + d  只移动9行，默认移动半屏
--- map("n", "<C-u>", "10k", opts)
--- map("n", "<C-d>", "10j", opts)
+map("n", "<C-u>", "10k", opts)
+map("n", "<C-d>", "10j", opts)
+map("v", "<C-u>", "10k", opts)
+map("v", "<C-d>", "10j", opts)
 
 -- magic search
 map("n", "/", "/\\m", { noremap = true, silent = false })

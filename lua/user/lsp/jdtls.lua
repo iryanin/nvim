@@ -34,5 +34,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.jdtls.setup({
   on_attach = on_attach,
-  capabilities = capabilities
+  capabilities = capabilities,
+  root_dir = function(fname)
+    return require 'lspconfig'.util.root_pattern('pom.xml', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
+  end
 })

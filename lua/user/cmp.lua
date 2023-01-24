@@ -28,7 +28,7 @@ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 cmp.setup({
   view = {
-    entries = { name = 'custom', selection_order = 'near_cursor' }
+    entries = { name = 'custom' }
   },
   snippet = {
     expand = function(args)

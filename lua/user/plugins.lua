@@ -110,8 +110,8 @@ return packer.startup(function(use)
     end,
   })
 
-  -- use("nvim-telescope/telescope-ui-select.nvim")
-  use("simrat39/symbols-outline.nvim")
+  use("nvim-telescope/telescope-ui-select.nvim")
+  use({ "simrat39/symbols-outline.nvim" })
   use({ "tzachar/cmp-tabnine", run = "./install.sh" })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
