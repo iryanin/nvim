@@ -42,3 +42,10 @@ vim.api.nvim_create_autocmd("FileType",
     group = bpGrp,
     command = ":lua require('user.dap.util').load_breakpoints()"
   })
+
+local javaGrp = vim.api.nvim_create_augroup("javaGrp", { clear = true })
+vim.api.nvim_create_autocmd("FileType",
+  { pattern = { "java" },
+    group = javaGrp,
+    command = ":lua require('user.jdtls')"
+  })

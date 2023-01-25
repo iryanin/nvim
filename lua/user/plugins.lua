@@ -96,7 +96,8 @@ return packer.startup(function(use)
   -- use({ "michaelb/sniprun", run = "zsh ./install.sh" })
   use({ "CRAG666/code_runner.nvim" })
   -- use { 'fgheng/winbar.nvim' }
-  -- use("mfussenegger/nvim-jdtls")
+  use("mfussenegger/nvim-jdtls")
+  use({"utilyre/barbecue.nvim"})
   -- use("ggandor/leap.nvim")
   -- use("tpope/vim-repeat")
   use { "SmiteshP/nvim-navic" }

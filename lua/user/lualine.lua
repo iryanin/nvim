@@ -3,11 +3,6 @@ if not lualine_status_ok then
   return
 end
 
-local navic_status_ok, navic = pcall(require, "nvim-navic")
-if not navic_status_ok then
-  return
-end
-
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -29,8 +24,6 @@ lualine.setup {
     globalstatus = true,
     refresh = {
       statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
     }
   },
   sections = {
@@ -63,16 +56,5 @@ lualine.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
-  winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { { 'filename', path = 1, color = { bg = 'NONE' }, cond = navic.is_available },
-      { navic.get_location, cond = navic.is_available } },
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  inactive_winbar = {},
   extensions = { "nvim-tree", "symbols-outline", "nvim-dap-ui" },
 }
