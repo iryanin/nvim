@@ -97,7 +97,7 @@ return packer.startup(function(use)
   use({ "CRAG666/code_runner.nvim" })
   -- use { 'fgheng/winbar.nvim' }
   use("mfussenegger/nvim-jdtls")
-  use({"utilyre/barbecue.nvim"})
+  use({ "utilyre/barbecue.nvim" })
   -- use("ggandor/leap.nvim")
   -- use("tpope/vim-repeat")
   use { "SmiteshP/nvim-navic" }
@@ -111,7 +111,6 @@ return packer.startup(function(use)
     end,
   })
 
-  use("nvim-telescope/telescope-ui-select.nvim")
   use({ "simrat39/symbols-outline.nvim" })
   use({ "tzachar/cmp-tabnine", run = "./install.sh" })
   -- Automatically set up your configuration after cloning packer.nvim
