@@ -53,6 +53,7 @@
         "/Users/ryan/.local/share/nvim/site/pack/packer/start/cmp-path/after",
         "/Users/ryan/.local/share/nvim/site/pack/packer/start/cmp-tabnine/after",
         "/Users/ryan/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after",
+        "${3rd}/luassert/library",
         "${3rd}/luassert/library"
     ],
     "diagnostics.disable": [
