@@ -14,9 +14,10 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local source_mapping = {
   buffer = "[Buffer]",
   nvim_lsp = "[LSP]",
-  nvim_lua = "[Lua]",
-  cmp_tabnine = "[TabNine]",
+  luasnip = "[Snippet]",
   path = "[Path]",
+  cmdline = "[Command]",
+  cmp_tabnine = "[TabNine]",
 }
 local compare = require("cmp.config.compare")
 local has_words_before = function()
@@ -30,18 +31,21 @@ cmp.setup({
   view = {
     entries = { name = 'custom' }
   },
+
   snippet = {
     expand = function(args)
       -- For `luasnip` users.
       require("luasnip").lsp_expand(args.body)
     end,
   },
+
   sources = cmp.config.sources({
     { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
     -- For luasnip users.
     { name = "luasnip" },
   }, { { name = "buffer" }, { name = "path" } }),
+
   sorting = {
     priority_weight = 2,
     comparators = {
@@ -57,23 +61,11 @@ cmp.setup({
     },
   },
 
-  -- formatting = {
-  -- 	format = lspkind.cmp_format({
-  -- 		mode = "symbol", -- show only symbol annotations
-  -- 		maxwidth = 50,
-  -- 		before = function(entry, vim_item)
-  -- 			vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
-  -- 			return vim_item
-  -- 		end,
-  -- 	}),
   formatting = {
-    -- fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      -- if you have lspkind installed, you can use it like
-      -- in the following line:
-      vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+      vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" }) .. " ".. vim_item.kind
       vim_item.menu = source_mapping[entry.source.name]
-      if entry.source.name == "cmp_tabnine" then
+            if entry.source.name == "cmp_tabnine" then
         local detail = (entry.completion_item.data or {}).detail
         vim_item.kind = ""
         if detail and detail:find(".*%%.*") then
@@ -109,8 +101,8 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+        -- elseif luasnip.expand_or_jumpable() then
+        --   luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else
@@ -121,8 +113,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+        -- elseif luasnip.jumpable(-1) then
+        --   luasnip.jump(-1)
       else
         fallback()
       end
@@ -150,3 +142,15 @@ cmp.event:on(
   'confirm_done',
   cmp_autopairs.on_confirm_done()
 )
+
+vim.cmd [[highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080]]
+vim.cmd [[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
+vim.cmd [[highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch]]
+vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
+vim.cmd [[highlight! link CmpItemKindInterface CmpItemKindVariable]]
+vim.cmd [[highlight! link CmpItemKindText CmpItemKindVariable]]
+vim.cmd [[highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0]]
+vim.cmd [[highlight! link CmpItemKindMethod CmpItemKindFunction]]
+vim.cmd [[highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4]]
+vim.cmd [[highlight! link CmpItemKindProperty CmpItemKindKeyword]]
+vim.cmd [[highlight! link CmpItemKindUnit CmpItemKindKeyword]]
