@@ -84,19 +84,6 @@ map("n", "<leader>l", "<C-w>l", opts)
 -- 相等比例
 map("n", "s=", "<C-w>=", opts)
 
--- Terminal相关
--- map("n", "st", ":sp | terminal<CR>", opts)
--- map("n", "stv", ":vsp | terminal<CR>", opts)
--- Esc 回 Normal 模式
--- map("t", "<Esc>", "<C-\\><C-n>", opts)
--- map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opts)
--- map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opts)
--- map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opts)
--- map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opts)
--- map("t", "<leader>h", [[ <C-\><C-N><C-w>h ]], opts)
--- map("t", "<leader>j", [[ <C-\><C-N><C-w>j ]], opts)
--- map("t", "<leader>k", [[ <C-\><C-N><C-w>k ]], opts)
--- map("t", "<leader>l", [[ <C-\><C-N><C-w>l ]], opts)
 --------------------------------------------------------------------
 
 -- treesitter 折叠
@@ -149,37 +136,3 @@ map("n", "<leader>rf", ":RunFile<CR>", opts)
 map("n", "<leader>rs", ":RunCode<CR>", opts)
 map("n", "<leader>rp", ":RunProject<CR>", opts)
 map("n", "<leader>rc", ":RunClose<CR>", opts)
-
--- nvim-dap
-map(
-  "n",
-  "<leader>de",
-  ":lua require'dap'.close()<CR>"
-  .. ":lua require'dap'.terminate()<CR>"
-  .. ":lua require'dap.repl'.close()<CR>"
-  .. ":lua require'dapui'.close()<CR>"
-  .. ":lua require('dap').clear_breakpoints()<CR>"
-  .. "<C-w>o<CR>",
-  opts
-)
--- 继续
-map("n", "<leader>dc", ":lua require'dap'.continue()<CR>", opts)
--- 设置断点
-map(
-  "n",
-  "<leader>dt",
-  ":lua require('dap').toggle_breakpoint();require'user.dap.util'.store_breakpoints(true)<CR>",
-  opts
-)
-map(
-  "n",
-  "<leader>dT",
-  ":lua require('dap').clear_breakpoints();require'user.dap.util'.store_breakpoints(true)<CR>",
-  opts
-)
---  stepOver, stepOut, stepInto
-map("n", "<leader>dj", ":lua require'dap'.step_over()<CR>", opts)
-map("n", "<leader>dk", ":lua require'dap'.step_out()<CR>", opts)
-map("n", "<leader>dl", ":lua require'dap'.step_into()<CR>", opts)
-
-map("n", "<leader>dh", ":lua require'dapui'.eval()<CR>", opts)

@@ -36,13 +36,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-local bpGrp = vim.api.nvim_create_augroup("bpGrp", { clear = true })
-vim.api.nvim_create_autocmd("FileType",
-  { pattern = { "c", "cpp", "go", "python", "lua" },
-    group = bpGrp,
-    command = ":lua require('user.dap.util').load_breakpoints()"
-  })
-
 local javaGrp = vim.api.nvim_create_augroup("javaGrp", { clear = true })
 vim.api.nvim_create_autocmd("FileType",
   { pattern = { "java" },

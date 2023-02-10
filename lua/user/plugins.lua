@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
   use("numToStr/Comment.nvim")
   use 'nvim-treesitter/nvim-treesitter-context'
-  use("stevearc/dressing.nvim")
+  -- use("stevearc/dressing.nvim")
   use("kyazdani42/nvim-web-devicons")
   use("kyazdani42/nvim-tree.lua")
   use("akinsho/bufferline.nvim")
@@ -60,7 +60,6 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim")
   -- Colorschemes
   use("folke/tokyonight.nvim")
-  use 'navarasu/onedark.nvim'
 
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -78,11 +77,6 @@ return packer.startup(function(use)
   use("neovim/nvim-lspconfig") -- enable LSP
   -- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
   --DAP
-  use("mfussenegger/nvim-dap")
-  use("theHamsta/nvim-dap-virtual-text")
-  use("rcarriga/nvim-dap-ui")
-  use("nvim-telescope/telescope-dap.nvim")
-  -- use("sakhnik/nvim-gdb")
 
   -- Telescope
   use("nvim-telescope/telescope.nvim")

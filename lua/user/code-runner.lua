@@ -39,13 +39,13 @@ code_runner.setup({
   -- put here the commands by filetype
   filetype = {
     javascript = "node",
-    java = "cd $dir && javac $fileName && java $fileNameWithoutExt",
-    c = "cd $dir && clang -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
-    cpp = "cd $dir && clang++ -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
-    python = "python3 -u",
-    typescript = "deno run",
+    java = "cd $dir && javac $fileName && time java $fileNameWithoutExt",
+    c = "cd $dir && clang -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+    cpp = "cd $dir && clang++ -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+    python = "time python3 -u",
+    typescript = "time deno run",
     sh = "zsh",
-    rust = "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt"
+    rust = "cd $dir && rustc $fileName && time $dir/$fileNameWithoutExt"
   },
   project_path = "", -- No default path defined
   project = {},

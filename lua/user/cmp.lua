@@ -14,7 +14,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local source_mapping = {
   buffer = "[Buffer]",
   nvim_lsp = "[LSP]",
-  luasnip = "[Snippet]",
+  luasnip = "[LuaSnip]",
   path = "[Path]",
   cmdline = "[Command]",
   cmp_tabnine = "[TabNine]",
@@ -63,9 +63,9 @@ cmp.setup({
 
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" }) .. " ".. vim_item.kind
+      vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" }) .. " " .. vim_item.kind
       vim_item.menu = source_mapping[entry.source.name]
-            if entry.source.name == "cmp_tabnine" then
+      if entry.source.name == "cmp_tabnine" then
         local detail = (entry.completion_item.data or {}).detail
         vim_item.kind = ""
         if detail and detail:find(".*%%.*") then
@@ -95,14 +95,26 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
     }),
 
-    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+
+    ["<C-d>"] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      end
+    end, { "i", "s" }),
+
+    ["<C-u>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      end
+    end, { "i", "s" }),
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-        -- elseif luasnip.expand_or_jumpable() then
-        --   luasnip.expand_or_jump()
+      -- elseif luasnip.expand_or_jumpable() then
+      --   luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else
@@ -113,8 +125,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then
-        --   luasnip.jump(-1)
+      -- elseif luasnip.jumpable(-1) then
+      --   luasnip.jump(-1)
       else
         fallback()
       end
