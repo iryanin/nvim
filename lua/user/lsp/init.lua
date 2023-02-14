@@ -6,6 +6,6 @@ end
 require("user.lsp.ui")
 require("user.lsp.clangd")
 require("user.lsp.pyright")
-require("user.lsp.sumneko-lua")
+require("user.lsp.lua")
 -- require("user.lsp.jdtls")
 require("user.lsp.texlab")
