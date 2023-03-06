@@ -179,6 +179,11 @@ _G.packer_plugins = {
     path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/ryan/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
