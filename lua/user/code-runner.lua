@@ -21,17 +21,14 @@ code_runner.setup({
         close_key = '<ESC>',
         -- Window border (see ':h nvim_open_win')
         border = "none",
-
         -- Num from `0 - 1` for measurements
         height = 0.8,
         width = 0.8,
         x = 0.5,
         y = 0.5,
-
         -- Highlight group for floating window/border (see ':h winhl')
         border_hl = "FloatBorder",
         float_hl = "Normal",
-
         -- Transparency (see ':h winblend')
         blend = 0,
     },
@@ -40,8 +37,10 @@ code_runner.setup({
     filetype = {
         javascript = "node",
         java = "cd $dir && javac $fileName && time java $fileNameWithoutExt",
-        c = "cd $dir && clang -g -Wl,-stack_size -Wl,0x10000000 -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
-        cpp = "cd $dir && clang++ -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+        c =
+        "cd $dir && clang -g -Wl,-stack_size -Wl,0x10000000 -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+        cpp =
+        "cd $dir && clang++ -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
         python = "time python3 -u",
         typescript = "time deno run",
         sh = "zsh",
