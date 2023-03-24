@@ -35,10 +35,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
         + "r" -- But do continue when pressing enter.
   end,
 })
-
-local javaGrp = vim.api.nvim_create_augroup("javaGrp", { clear = true })
-vim.api.nvim_create_autocmd("FileType",
-  { pattern = { "java" },
-    group = javaGrp,
-    command = ":lua require('user.jdtls')"
-  })
