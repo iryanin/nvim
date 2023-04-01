@@ -415,7 +415,7 @@ require("lazy").setup({
 				settings = {
 					texlab = {
 						build = {
-							args = { "-pdf", "-xelatex", "-pvc", "-interaction=nonstopmode", "-synctex=1", "%f" },
+							args = { "-pdf", "-xelatex", "-pv", "-interaction=nonstopmode", "-synctex=1", "%f" },
 							executable = "latexmk",
 							forwardSearchAfter = true,
 							onSave = true,
