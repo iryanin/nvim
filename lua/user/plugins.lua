@@ -33,16 +33,16 @@ require("lazy").setup({
         end,
     },
     { "stevearc/dressing.nvim" },
-    {
-        "folke/noice.nvim",
-        config = function()
-            require("noice").setup({})
-        end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
+    -- {
+    --     "folke/noice.nvim",
+    --     config = function()
+    --         require("noice").setup({})
+    --     end,
+    --     dependencies = {
+    --         "MunifTanjim/nui.nvim",
+    --         "rcarriga/nvim-notify",
+    --     },
+    -- },
     {
         "kyazdani42/nvim-tree.lua",
         config = function()
@@ -173,7 +173,7 @@ require("lazy").setup({
             }
 
             local function footer()
-                return "Stay hungry,stay foolish."
+                return "Footer"
             end
 
             dashboard.section.footer.val = footer()
@@ -536,9 +536,8 @@ require("lazy").setup({
 
     {
         "iamcco/markdown-preview.nvim",
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
+        ft = "markdown",
+        build = ":call mkdp#util#install()",
     },
 
     {
