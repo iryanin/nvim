@@ -3,8 +3,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local opts = {
-  noremap = true,
-  silent = true,
+    noremap = true,
+    silent = true,
 }
 
 -- 本地变量
@@ -136,3 +136,25 @@ map("n", "<leader>rf", ":RunFile<CR>", opts)
 map("n", "<leader>rs", ":RunCode<CR>", opts)
 map("n", "<leader>rp", ":RunProject<CR>", opts)
 map("n", "<leader>rc", ":RunClose<CR>", opts)
+--dap
+map(
+    "n",
+    "<leader>de",
+    ":lua require'dap'.close()<CR>"
+    .. ":lua require'dap'.terminate()<CR>"
+    .. ":lua require'dap.repl'.close()<CR>"
+    .. ":lua require'dapui'.close()<CR>"
+    .. ":lua require('dap').clear_breakpoints()<CR>",
+    opts
+)
+-- 继续
+map("n", "<leader>dc", ":lua require'dap'.continue()<CR>", opts)
+-- 设置断点
+map("n", "<leader>dt", ":lua require('dap').toggle_breakpoint();require'user.util'.store_breakpoints(true)<CR>", opts)
+map("n", "<leader>dT", ":lua require('dap').clear_breakpoints();require'user.util'.store_breakpoints(true)<CR>", opts)
+--  stepOver, stepOut, stepInto
+map("n", "<leader>do", ":lua require'dap'.step_over()<CR>", opts)
+map("n", "<leader>dd", ":lua require'dap'.step_out()<CR>", opts)
+map("n", "<leader>di", ":lua require'dap'.step_into()<CR>", opts)
+-- 弹窗
+map("n", "<leader>dh", ":lua require'dapui'.eval()<CR>", opts)

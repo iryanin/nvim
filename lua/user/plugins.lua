@@ -150,6 +150,85 @@ require("lazy").setup({
     },
     { "lukas-reineke/indent-blankline.nvim" },
     {
+        "mfussenegger/nvim-dap",
+        config = function()
+            local dap = require("dap")
+            local dap_breakpoint = {
+                error = {
+                    -- text = "🧘🛑⊚⭕🟢🔵🚫👉⭐️⛔️🔴",
+                    text = "🔴",
+                    texthl = "LspDiagnosticsSignError",
+                    linehl = "",
+                    numhl = "",
+                },
+                rejected = {
+                    text = "",
+                    texthl = "LspDiagnosticsSignHint",
+                    linehl = "",
+                    numhl = "",
+                },
+                stopped = {
+                    text = "👉",
+                    texthl = "LspDiagnosticsSignInformation",
+                    linehl = "DiagnosticUnderlineInfo",
+                    numhl = "LspDiagnosticsSignInformation",
+                },
+            }
+
+            vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
+            vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
+            vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
+            dap.adapters.lldb = {
+                type = "executable",
+                command = "/opt/homebrew/Cellar/llvm/16.0.0/bin/lldb-vscode", -- adjust as needed, must be absolute path
+                name = "lldb",
+            }
+            dap.configurations.cpp = {
+                {
+                    name = "Launch",
+                    type = "lldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = function()
+                        local input = vim.fn.input("Input args: ")
+                        return require("user.util").str2argtable(input)
+                    end,
+                    runInTerminal = true,
+                },
+            }
+            dap.configurations.c = dap.configurations.cpp
+            dap.configurations.rust = dap.configurations.cpp
+        end,
+    },
+    {
+        "theHamsta/nvim-dap-virtual-text",
+        dependencies = { "mfussenegger/nvim-dap" },
+        config = function()
+            require("nvim-dap-virtual-text").setup()
+        end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap" },
+        config = function()
+            require("dapui").setup()
+            local dap, dapui = require("dap"), require("dapui")
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+        end,
+    },
+    {
         "goolord/alpha-nvim",
         config = function()
             local alpha = require("alpha")
@@ -173,7 +252,7 @@ require("lazy").setup({
             }
 
             local function footer()
-                return "Footer"
+                return "Take the hits, lick our wounds, and move on."
             end
 
             dashboard.section.footer.val = footer()
@@ -418,7 +497,6 @@ require("lazy").setup({
                             args = {
                                 "-pdf",
                                 "-xelatex",
-                                "-pv",
                                 "-shell-escape",
                                 "-interaction=nonstopmode",
                                 "-synctex=1",
