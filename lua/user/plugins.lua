@@ -14,11 +14,45 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
 	{
-		"folke/tokyonight.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		config = function()
-			vim.cmd([[colorscheme tokyonight]])
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+				background = {
+					light = "mocha",
+					dark = "mocha",
+				},
+				color_overrides = {
+					all = {},
+					latte = {},
+					frappe = {},
+					macchiato = {},
+					mocha = {
+						base = "#000000",
+						mantle = "#000000",
+						crust = "#000000",
+					},
+				},
+				transparent_background = true,
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					nvimtree = true,
+					telescope = true,
+					notify = false,
+					mini = false,
+				},
+			})
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	config = function()
+	-- 		vim.cmd([[colorscheme tokyonight]])
+	-- 	end,
+	-- },
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -358,6 +392,11 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"tzachar/cmp-tabnine",
+		build = "./install.sh",
+		dependencies = "hrsh7th/nvim-cmp",
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
@@ -373,6 +412,12 @@ require("lazy").setup({
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
+			lspkind.init({
+				symbol_map = {
+					TabNine = "",
+				},
+			})
+			local compare = require("cmp.config.compare")
 			local has_words_before = function()
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 				return col ~= 0
@@ -385,10 +430,27 @@ require("lazy").setup({
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				sources = cmp.config.sources({
+				sorting = {
+					priority_weight = 2,
+					comparators = {
+						require("cmp_tabnine.compare"),
+						compare.offset,
+						compare.exact,
+						compare.score,
+						compare.recently_used,
+						compare.kind,
+						compare.sort_text,
+						compare.length,
+						compare.order,
+					},
+				},
+				sources = {
 					{ name = "nvim_lsp" },
+					{ name = "cmp_tabnine" },
 					{ name = "luasnip" },
-				}, { { name = "buffer" }, { name = "path" } }),
+					{ name = "buffer" },
+					{ name = "path" },
+				},
 				formatting = {
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
@@ -399,6 +461,7 @@ require("lazy").setup({
 							nvim_lua = "[Lua]",
 							path = "[Path]",
 							cmdline = "[Command]",
+							cmp_tabnine = "[TabNine]",
 						},
 					}),
 				},
@@ -455,11 +518,10 @@ require("lazy").setup({
 
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
+				sources = {
 					{ name = "path" },
-				}, {
 					{ name = "cmdline" },
-				}),
+				},
 			})
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
