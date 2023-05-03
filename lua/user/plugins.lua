@@ -59,7 +59,13 @@ require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
-
+    {
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    },
     {
         "numToStr/Comment.nvim",
         config = function()
@@ -159,21 +165,6 @@ require("lazy").setup({
                     lualine_b = { "branch", "diff", "diagnostics" },
                     lualine_c = {
                         "filename",
-                        {
-                            "lsp_progress",
-                            display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
-                            separators = {
-                                component = " ",
-                                progress = " | ",
-                                message = { pre = "(", post = ")", commenced = "In Progress", completed = "Completed" },
-                                percentage = { pre = "", post = "%% " },
-                                title = { pre = "", post = ": " },
-                                lsp_client_name = { pre = "[", post = "]" },
-                                spinner = { pre = "", post = "" },
-                            },
-                            timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
-                            spinner_symbols = { "🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 " },
-                        },
                     },
                     lualine_x = { "encoding", "fileformat", "filetype" },
                     lualine_y = { "progress" },
@@ -697,8 +688,12 @@ require("lazy").setup({
         end,
     },
     "SmiteshP/nvim-navic",
-    "arkav/lualine-lsp-progress",
-
+    {
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup({})
+        end,
+    },
     {
         "iamcco/markdown-preview.nvim",
         ft = "markdown",
