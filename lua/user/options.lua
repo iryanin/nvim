@@ -65,6 +65,8 @@ vim.g.completeopt = "menu,menuone,noselect,noinsert"
 vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- 不可见字符的显示，这里只把空格显示为一个点
 -- vim.o.list = true
 -- vim.o.listchars = "space:·"
@@ -79,6 +81,6 @@ vim.o.showtabline = 2
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false
 vim.o.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 300 -- faster completion (4000ms default)
+vim.opt.undofile = true         -- enable persistent undo
+vim.opt.updatetime = 300        -- faster completion (4000ms default)
 vim.g["tex_flavor"] = "latex"
