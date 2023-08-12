@@ -9,6 +9,7 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 -- 高亮所在行
 vim.wo.cursorline = true
+vim.o.cursorlineopt = "number"
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
