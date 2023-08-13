@@ -557,7 +557,7 @@ require("lazy").setup({
                         build = {
                             args = {
                                 "-pdf",
-                                "-xelatex",
+                                "-lualatex",
                                 "-shell-escape",
                                 "-interaction=nonstopmode",
                                 "-synctex=1",
