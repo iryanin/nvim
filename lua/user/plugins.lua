@@ -222,7 +222,7 @@ require("lazy").setup({
                     type = "lldb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        return vim.fn.input("Path to executable: ", vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":r"))
                     end,
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,

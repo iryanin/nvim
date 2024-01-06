@@ -1,9 +1,9 @@
 -- 进入Terminal 自动进入插入模式
-local terGrp = vim.api.nvim_create_augroup("termOpen", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = terGrp,
-	command = "startinsert",
-})
+-- local terGrp = vim.api.nvim_create_augroup("termOpen", { clear = true })
+-- vim.api.nvim_create_autocmd("TermOpen", {
+-- 	group = terGrp,
+-- 	command = "startinsert",
+-- })
 
 local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {

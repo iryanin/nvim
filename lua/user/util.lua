@@ -53,7 +53,7 @@ end
 
 
 -- persist breakpoint
-local bp_base_dir = os.getenv("HOME") .. "/.cache/dap-breakpoint/"
+local bp_base_dir = os.getenv("HOME") .. "/.cache/nvim/breakpoints/"
 local breakpoints = require('dap.breakpoints')
 
 local function exists(file)
