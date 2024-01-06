@@ -164,7 +164,8 @@ require("lazy").setup({
                     lualine_y = {},
                     lualine_z = {},
                 },
-                extensions = { "nvim-tree", "symbols-outline", "nvim-dap-ui" },
+                -- extensions = { "nvim-tree", "symbols-outline", "nvim-dap-ui" },
+                extensions = { "nvim-tree", "symbols-outline"},
             })
         end,
     },
@@ -182,85 +183,85 @@ require("lazy").setup({
         end,
     },
     { "lukas-reineke/indent-blankline.nvim" },
-    {
-        "mfussenegger/nvim-dap",
-        config = function()
-            local dap = require("dap")
-            local dap_breakpoint = {
-                error = {
-                    -- text = "🧘🛑⊚⭕🟢🔵🚫👉⭐️⛔️🔴",
-                    text = "🔴",
-                    texthl = "LspDiagnosticsSignError",
-                    linehl = "",
-                    numhl = "",
-                },
-                rejected = {
-                    text = "",
-                    texthl = "LspDiagnosticsSignHint",
-                    linehl = "",
-                    numhl = "",
-                },
-                stopped = {
-                    text = "👉",
-                    texthl = "LspDiagnosticsSignInformation",
-                    linehl = "DiagnosticUnderlineInfo",
-                    numhl = "LspDiagnosticsSignInformation",
-                },
-            }
-
-            vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
-            vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
-            vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
-            dap.adapters.lldb = {
-                type = "executable",
-                command = "/opt/homebrew/Cellar/llvm/16.0.2/bin/lldb-vscode", -- adjust as needed, must be absolute path
-                name = "lldb",
-            }
-            dap.configurations.cpp = {
-                {
-                    name = "Launch",
-                    type = "lldb",
-                    request = "launch",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
-                    cwd = "${workspaceFolder}",
-                    stopOnEntry = false,
-                    args = function()
-                        local input = vim.fn.input("Input args: ")
-                        return require("user.util").str2argtable(input)
-                    end,
-                    runInTerminal = true,
-                },
-            }
-            dap.configurations.c = dap.configurations.cpp
-            dap.configurations.rust = dap.configurations.cpp
-        end,
-    },
-    {
-        "theHamsta/nvim-dap-virtual-text",
-        dependencies = { "mfussenegger/nvim-dap" },
-        config = function()
-            require("nvim-dap-virtual-text").setup()
-        end,
-    },
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = { "mfussenegger/nvim-dap" },
-        config = function()
-            require("dapui").setup()
-            local dap, dapui = require("dap"), require("dapui")
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close()
-            end
-        end,
-    },
+    -- {
+    --     "mfussenegger/nvim-dap",
+    --     config = function()
+    --         local dap = require("dap")
+    --         local dap_breakpoint = {
+    --             error = {
+    --                 -- text = "🧘🛑⊚⭕🟢🔵🚫👉⭐️⛔️🔴",
+    --                 text = "🔴",
+    --                 texthl = "LspDiagnosticsSignError",
+    --                 linehl = "",
+    --                 numhl = "",
+    --             },
+    --             rejected = {
+    --                 text = "",
+    --                 texthl = "LspDiagnosticsSignHint",
+    --                 linehl = "",
+    --                 numhl = "",
+    --             },
+    --             stopped = {
+    --                 text = "👉",
+    --                 texthl = "LspDiagnosticsSignInformation",
+    --                 linehl = "DiagnosticUnderlineInfo",
+    --                 numhl = "LspDiagnosticsSignInformation",
+    --             },
+    --         }
+    --
+    --         vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
+    --         vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
+    --         vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
+    --         dap.adapters.lldb = {
+    --             type = "executable",
+    --             command = "/opt/homebrew/Cellar/llvm/16.0.2/bin/lldb-vscode", -- adjust as needed, must be absolute path
+    --             name = "lldb",
+    --         }
+    --         dap.configurations.cpp = {
+    --             {
+    --                 name = "Launch",
+    --                 type = "lldb",
+    --                 request = "launch",
+    --                 program = function()
+    --                     return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    --                 end,
+    --                 cwd = "${workspaceFolder}",
+    --                 stopOnEntry = false,
+    --                 args = function()
+    --                     local input = vim.fn.input("Input args: ")
+    --                     return require("user.util").str2argtable(input)
+    --                 end,
+    --                 runInTerminal = true,
+    --             },
+    --         }
+    --         dap.configurations.c = dap.configurations.cpp
+    --         dap.configurations.rust = dap.configurations.cpp
+    --     end,
+    -- },
+    -- {
+    --     "theHamsta/nvim-dap-virtual-text",
+    --     dependencies = { "mfussenegger/nvim-dap" },
+    --     config = function()
+    --         require("nvim-dap-virtual-text").setup()
+    --     end,
+    -- },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = { "mfussenegger/nvim-dap" },
+    --     config = function()
+    --         require("dapui").setup()
+    --         local dap, dapui = require("dap"), require("dapui")
+    --         dap.listeners.after.event_initialized["dapui_config"] = function()
+    --             dapui.open()
+    --         end
+    --         dap.listeners.before.event_terminated["dapui_config"] = function()
+    --             dapui.close()
+    --         end
+    --         dap.listeners.before.event_exited["dapui_config"] = function()
+    --             dapui.close()
+    --         end
+    --     end,
+    -- },
     {
         "goolord/alpha-nvim",
         config = function()
@@ -390,11 +391,6 @@ require("lazy").setup({
         end,
     },
     {
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-        dependencies = "hrsh7th/nvim-cmp",
-    },
-    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -410,11 +406,7 @@ require("lazy").setup({
             local luasnip = require("luasnip")
             local cmp = require("cmp")
             local lspkind = require("lspkind")
-            lspkind.init({
-                symbol_map = {
-                    TabNine = "",
-                },
-            })
+            lspkind.init()
             local compare = require("cmp.config.compare")
             local has_words_before = function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -431,7 +423,6 @@ require("lazy").setup({
                 sorting = {
                     priority_weight = 2,
                     comparators = {
-                        require("cmp_tabnine.compare"),
                         compare.offset,
                         compare.exact,
                         compare.score,
@@ -444,7 +435,6 @@ require("lazy").setup({
                 },
                 sources = {
                     { name = "nvim_lsp" },
-                    { name = "cmp_tabnine" },
                     { name = "luasnip" },
                     { name = "buffer" },
                     { name = "path" },
@@ -459,7 +449,6 @@ require("lazy").setup({
                             nvim_lua = "[Lua]",
                             path = "[Path]",
                             cmdline = "[Command]",
-                            cmp_tabnine = "[TabNine]",
                         },
                     }),
                 },
@@ -556,7 +545,7 @@ require("lazy").setup({
                         build = {
                             args = {
                                 "-pdf",
-                                "-lualatex",
+                                "-xelatex",
                                 "-shell-escape",
                                 "-interaction=nonstopmode",
                                 "-synctex=1",
@@ -687,9 +676,6 @@ require("lazy").setup({
                 },
             })
         end,
-    },
-    {
-        "mfussenegger/nvim-jdtls",
     },
     {
         "utilyre/barbecue.nvim",

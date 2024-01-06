@@ -22,9 +22,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			+ "r" -- But do continue when pressing enter.
 	end,
 })
-local brpGrp = vim.api.nvim_create_augroup("brpGrp", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "java", "cpp", "go", "c", "py", "lua" },
-	group = brpGrp,
-	command = ":lua require('user.util').load_breakpoints()",
-})
+-- local brpGrp = vim.api.nvim_create_augroup("brpGrp", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = { "java", "cpp", "go", "c", "py", "lua" },
+-- 	group = brpGrp,
+-- 	command = ":lua require('user.util').load_breakpoints()",
+-- })
