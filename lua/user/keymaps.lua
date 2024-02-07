@@ -109,7 +109,7 @@ map("n", "<leader>bp", ":BufferLinePickClose<CR>", opts)
 
 -- Telescope
 map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+map("n", "<leader>lg", ":Telescope live_grep<CR>", opts)
 
 --lsp
 --outline
@@ -131,7 +131,7 @@ map("n", "<leader>f", ":lua vim.lsp.buf.format({async=true})<CR>", opts)
 --autosave
 map("n", "<leader>n", ":ASToggle<CR>", opts)
 --markdown-preview
-map("n", "<C-s>", ":MarkdownPreview<CR>", opts)
+map("n", "<leader>mp", ":MarkdownPreview<CR>", opts)
 map("n", "<leader>rf", ":RunFile<CR>", opts)
 map("n", "<leader>rs", ":RunCode<CR>", opts)
 map("n", "<leader>rp", ":RunProject<CR>", opts)

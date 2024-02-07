@@ -73,16 +73,16 @@ require("lazy").setup({
             })
         end,
     },
-    {
-        "folke/noice.nvim",
-        config = function()
-            require("noice").setup({})
-        end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
+    -- {
+    --     "folke/noice.nvim",
+    --     config = function()
+    --         require("noice").setup({})
+    --     end,
+    --     dependencies = {
+    --         "MunifTanjim/nui.nvim",
+    --         "rcarriga/nvim-notify",
+    --     },
+    -- },
     {
         "kyazdani42/nvim-tree.lua",
         config = function()
@@ -222,7 +222,8 @@ require("lazy").setup({
                     type = "lldb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":r"))
+                        return vim.fn.input("Path to executable: ",
+                            vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":r"))
                     end,
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
