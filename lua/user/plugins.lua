@@ -19,6 +19,7 @@ require("lazy").setup({
         priority = 1000,
         config = function()
             require("catppuccin").setup({
+                flavour = "mocha", -- latte, frappe, macchiato, mocha
                 transparent_background = true,
                 integrations = {
                     cmp = true,
@@ -33,12 +34,6 @@ require("lazy").setup({
             vim.cmd.colorscheme("catppuccin")
         end,
     },
-    -- {
-    -- 	"folke/tokyonight.nvim",
-    -- 	config = function()
-    -- 		vim.cmd([[colorscheme tokyonight]])
-    -- 	end,
-    -- },
     {
         "windwp/nvim-autopairs",
         config = function()
@@ -454,7 +449,7 @@ require("lazy").setup({
                 },
                 mapping = {
                     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-                    ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+                    ['<C-e>'] = cmp.mapping.abort(),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<CR>"] = cmp.mapping.confirm({
@@ -613,7 +608,24 @@ require("lazy").setup({
         end,
     },
     {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            local toggleterm = require('toggleterm')
+            toggleterm.setup({
+                open_mapping = '<C-\\>',
+                direction = 'horizontal',
+                shade_terminals = true,
+                close_on_exit = true, -- close the terminal window when the process exits
+            })
+        end,
+    },
+    {
         "nvim-telescope/telescope.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "debugloop/telescope-undo.nvim",
+        },
         config = function()
             local telescope = require("telescope")
             telescope.setup({
@@ -629,6 +641,7 @@ require("lazy").setup({
                 },
             })
             telescope.load_extension("projects")
+            telescope.load_extension("undo")
         end,
     },
     "onsails/lspkind.nvim",
@@ -640,8 +653,12 @@ require("lazy").setup({
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = "all",
+                -- Automatically install missing parsers when entering buffer
+                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+                auto_install = true,
                 highlight = {
                     enable = true,
+                    additional_vim_regex_highlighting = false,
                 },
                 incremental_selection = {
                     enable = true,
@@ -660,6 +677,7 @@ require("lazy").setup({
         "CRAG666/code_runner.nvim",
         config = function()
             require("code_runner").setup({
+                mode = "toggleterm",
                 filetype = {
                     javascript = "node",
                     java = "cd $dir && javac $fileName && time java $fileNameWithoutExt",

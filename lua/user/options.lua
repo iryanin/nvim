@@ -6,14 +6,14 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 -- 使用相对行号
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 -- 高亮所在行
 vim.wo.cursorline = true
 vim.o.cursorlineopt = "number"
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
--- vim.wo.colorcolumn = "160"
+vim.wo.colorcolumn = "160"
 -- 缩进2个空格等于一个Tab
 vim.o.tabstop = 4
 vim.bo.tabstop = 4
@@ -37,7 +37,7 @@ vim.o.hlsearch = true
 -- 边输入边搜索
 vim.o.incsearch = true
 -- 命令行高为2，提供足够的显示空间
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
 vim.bo.autoread = true
@@ -83,5 +83,8 @@ vim.o.showtabline = 2
 vim.o.showmode = false
 vim.o.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.undofile = true         -- enable persistent undo
-vim.opt.updatetime = 300        -- faster completion (4000ms default)
-vim.g["tex_flavor"] = "latex"
+vim.g.tex_flavor = "latex"
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
