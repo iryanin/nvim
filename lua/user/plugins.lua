@@ -61,7 +61,8 @@ require("lazy").setup({
                 auto_session_enabled = true,
                 auto_save_enabled = true,
                 auto_restore_enabled = true,
-                pre_save_cmds = { "NvimTreeClose", "OutlineClose" },
+                pre_save_cmds = { "NvimTreeClose", "OutlineClose", },
+                post_restore_cmds = { "OutlineOpen", "NvimTreeOpen", },
             })
         end,
     },
@@ -82,13 +83,17 @@ require("lazy").setup({
             })
         end,
     },
-
+    {
+        'famiu/bufdelete.nvim',
+    },
     {
         "akinsho/bufferline.nvim",
         config = function()
             local bufferline = require("bufferline")
             bufferline.setup({
                 options = {
+                    close_command = "Bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
+                    right_mouse_command = "Bdelete! %d", -- can be a string | function | false, see "Mouse actions"
                     offsets = {
                         {
                             filetype = "NvimTree",

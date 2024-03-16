@@ -78,8 +78,19 @@ map("n", "<leader>u", ":Telescope undo<cr>", opts)
 -- 左右Tab切换
 map("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
 map("n", "<leader>l", ":BufferLineCycleNext<CR>", opts)
+map("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
+map("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
+map("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
+map("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
+map("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
+map("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
+map("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+map("n", "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", opts)
+map("n", "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", opts)
+map("n", "<leader>$", "<Cmd>BufferLineGoToBuffer -1<CR>", opts)
+
 -- "moll/vim-bbye" 关闭当前 buffer
-map("n", "<leader>bc", ":bdelete!<CR>", opts)
+map("n", "<leader>bc", ":Bdelete!<CR>", opts)
 -- 关闭左/右侧标签页
 map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
 map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opts)
