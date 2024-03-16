@@ -59,6 +59,7 @@ require("lazy").setup({
         config = function()
             require("auto-session").setup({
                 auto_session_enabled = true,
+                pre_save_cmds = { "NvimTreeClose", "OutlineClose" },
             })
         end,
     },
@@ -75,7 +76,13 @@ require("lazy").setup({
     {
         "kyazdani42/nvim-tree.lua",
         config = function()
-            require("nvim-tree").setup({})
+            require("nvim-tree").setup({
+                actions = {
+                    open_file = {
+                        quit_on_open = true,
+                    },
+                },
+            })
         end,
     },
 
@@ -644,6 +651,7 @@ require("lazy").setup({
             })
             telescope.load_extension("projects")
             telescope.load_extension("undo")
+            telescope.load_extension("session-lens")
         end,
     },
     "onsails/lspkind.nvim",
