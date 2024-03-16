@@ -25,9 +25,6 @@ map("n", "<leader>qa", ":qa<CR>", opts)
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-map("n", "<C-u>", "<C-u>zz", opts)
-map("n", "<C-d>", "<C-d>zz", opts)
-
 -- magic search
 map("n", "/", "/\\m", { noremap = true, silent = false })
 map("v", "/", "/\\m", { noremap = true, silent = false })
