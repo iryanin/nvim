@@ -16,9 +16,9 @@ map("n", "g_", "$", opts)
 
 -- map("n", "<leader>q", ":q<CR>", opts)
 -- map("n", "<leader>w", ":w<CR>", opts)
-map("n", "<leader>wa", ":wa<CR>", opts)
+map("n", "<leader>ww", ":wa<CR>", opts)
 map("n", "<leader>wq", ":wqa<CR>", opts)
-map("n", "<leader>qa", ":qa<CR>", opts)
+map("n", "<leader>qq", ":qa<CR>", opts)
 -- map("n", "<leader>wqa", ":wqa<CR>", opts)
 
 -- fix :set wrap
@@ -62,6 +62,9 @@ map("n", "<C-l>", "<C-w>l", opts)
 -- 相等比例
 -- map("n", "s=", "<C-w>=", opts)
 
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+
 -- treesitter 折叠
 map("n", "zc", ":foldclose<CR>", opts)
 map("n", "zo", ":foldopen<CR>", opts)
@@ -101,7 +104,7 @@ map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
 --lsp
 --outline
-map("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts)
+map("n", "<leader>o", "<cmd>Outline<CR>", opts)
 map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 -- -- code action
 map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)

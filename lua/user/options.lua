@@ -2,8 +2,8 @@
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
 -- jkhl 移动时光标周围保留99行
-vim.o.scrolloff = 99
-vim.o.sidescrolloff = 99
+vim.o.scrolloff = 0
+vim.o.sidescrolloff = 0
 -- 使用相对行号
 vim.wo.number = true
 vim.wo.relativenumber = false

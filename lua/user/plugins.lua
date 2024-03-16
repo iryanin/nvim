@@ -75,7 +75,7 @@ require("lazy").setup({
     {
         "kyazdani42/nvim-tree.lua",
         config = function()
-            require("nvim-tree").setup()
+            require("nvim-tree").setup({})
         end,
     },
 
@@ -106,6 +106,14 @@ require("lazy").setup({
                 },
             })
         end,
+    },
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
     },
     {
         "nvim-lualine/lualine.nvim",
@@ -152,7 +160,8 @@ require("lazy").setup({
                     lualine_y = {},
                     lualine_z = {},
                 },
-                extensions = { "nvim-tree", "symbols-outline", "nvim-dap-ui" },
+                -- extensions = { "nvim-tree", "symbols-outline", "nvim-dap-ui" },
+                extensions = { "nvim-tree", "nvim-dap-ui" },
             })
         end,
     },
@@ -710,11 +719,43 @@ require("lazy").setup({
         ft = "markdown",
         build = ":call mkdp#util#install()",
     },
-
     {
-        "simrat39/symbols-outline.nvim",
+        "hedyhli/outline.nvim",
         config = function()
-            require("symbols-outline").setup()
+            require("outline").setup({
+                outline_window = {
+                    -- Where to open the split window: right/left
+                    position = 'right',
+                    -- Percentage or integer of columns
+                    width = 25,
+                    -- Whether width is relative to the total width of nvim
+                    -- When relative_width = true, this means take 25% of the total
+                    -- screen width for outline window.
+                    relative_width = true,
+                },
+                symbol_folding = {
+                    autofold_depth = false,
+                    -- auto_unfold = {
+                    --     hovered = true,
+                    -- },
+                },
+                preview_window = {
+                    auto_preview = true,
+                },
+            })
         end,
     },
+    -- {
+    --     'stevearc/aerial.nvim',
+    --     opts = {},
+    --     config = function()
+    --         require("aerial").setup({
+    --             backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
+    --         })
+    --     end,
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-tree/nvim-web-devicons"
+    --     },
+    -- },
 })
