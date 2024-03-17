@@ -62,7 +62,7 @@ require("lazy").setup({
                 auto_save_enabled = true,
                 auto_restore_enabled = true,
                 pre_save_cmds = { "NvimTreeClose", "OutlineClose", },
-                post_restore_cmds = { "OutlineOpen", "NvimTreeOpen", },
+                post_restore_cmds = { "NvimTreeOpen", },
             })
         end,
     },
