@@ -72,7 +72,7 @@ map("n", "zo", ":foldopen<CR>", opts)
 -- nvim-tree
 map("n", "<leader>m", ":NvimTreeToggle<CR>", opts)
 
-map("n", "<leader>u", ":Telescope undo<cr>", opts)
+map("n", "U", ":Telescope undo<cr>", opts)
 
 -- bufferline
 -- 左右Tab切换
