@@ -1,9 +1,9 @@
 -- utf8
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
--- jkhl 移动时光标周围保留99行
-vim.o.scrolloff = 0
-vim.o.sidescrolloff = 0
+-- jkhl 移动时光标周围保留8行
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
 -- 使用相对行号
 vim.o.number = true
 vim.o.relativenumber = false
@@ -51,7 +51,7 @@ vim.o.swapfile = false
 -- smaller updatetime
 vim.o.updatetime = 50
 -- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置
-vim.o.timeoutlen = 400
+vim.o.timeoutlen = 100
 -- split window 从下边和右边出现
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -83,4 +83,4 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
--- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
