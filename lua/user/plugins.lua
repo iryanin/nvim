@@ -521,6 +521,34 @@ require("lazy").setup({
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             lspconfig.clangd.setup({
+                root_dir = function(fname)
+                    return require("lspconfig.util").root_pattern(
+                        "Makefile",
+                        "configure.ac",
+                        "configure.in",
+                        "config.h.in",
+                        "meson.build",
+                        "meson_options.txt",
+                        "build.ninja"
+                    )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+                        fname
+                    ) or require("lspconfig.util").find_git_ancestor(fname)
+                end,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed",
+                    "--function-arg-placeholders",
+                    "--fallback-style=llvm",
+                },
+                init_options = {
+                    clangdFileStatus = true,
+                    usePlaceholders = true,
+                    completeUnimported = true,
+                    fallbackFlags = { '--std=c++2b' },
+                },
                 capabilities = capabilities,
             })
             lspconfig.pyright.setup({
