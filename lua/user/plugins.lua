@@ -541,7 +541,7 @@ require("lazy").setup({
                     "--header-insertion=iwyu",
                     "--completion-style=detailed",
                     "--function-arg-placeholders",
-                    "--fallback-style=llvm",
+                    "--fallback-style=chromium",
                 },
                 init_options = {
                     clangdFileStatus = true,
