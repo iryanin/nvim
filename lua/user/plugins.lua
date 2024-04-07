@@ -547,7 +547,7 @@ require("lazy").setup({
                     clangdFileStatus = true,
                     usePlaceholders = true,
                     completeUnimported = true,
-                    fallbackFlags = { '--std=c++2b' },
+                    -- fallbackFlags = { '--std=c++2b' },
                 },
                 capabilities = capabilities,
             })
