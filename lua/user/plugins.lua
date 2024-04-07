@@ -706,9 +706,10 @@ require("lazy").setup({
                     javascript = "node",
                     java = "cd $dir && javac $fileName && time java $fileNameWithoutExt",
                     c =
-                    "cd $dir && clang -g -Wl,-stack_size -Wl,0x10000000 -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+                    -- "cd $dir && clang -g -Wl,-stack_size -Wl,0x10000000 -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+                    "cd $dir && clang $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
                     cpp =
-                    "cd $dir && clang++ -g -Wextra -fsanitize=address -Wall -Wsign-compare -Wwrite-strings -Wtype-limits $fileName -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
+                    "cd $dir && clang++ --std=c++2b -o $fileNameWithoutExt && time $dir/$fileNameWithoutExt",
                     python = "time python3 -u",
                     typescript = "time deno run",
                     sh = "zsh",
