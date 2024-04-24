@@ -112,8 +112,16 @@ map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 map("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-map("n", "<leader>fs", ":lua require'auto-session.session-lens'.search_session()<CR>", opts)
+-- map("n", "<leader>fs", ":lua require'auto-session.session-lens'.search_session()<CR>", opts)
 -- map("n", "<leader>fs", ":Telescope session-lens<CR>", opts)
+
+-- persistence.nvim
+-- restore the session for the current directory
+vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})
+-- restore the last session
+vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
+-- stop Persistence => session won't be saved on exit
+vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {})
 
 --lsp
 --outline

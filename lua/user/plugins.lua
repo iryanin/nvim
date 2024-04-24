@@ -54,25 +54,37 @@ require("lazy").setup({
         end,
     },
     { "stevearc/dressing.nvim" },
+    -- Lua
     {
-        "rmagatti/auto-session",
-        config = function()
-            require("auto-session").setup({
-                auto_session_enabled = true,
-                auto_save_enabled = true,
-                auto_restore_enabled = false,
-                pre_save_cmds = { "NvimTreeClose", "OutlineClose", },
-                -- post_restore_cmds = { "NvimTreeOpen", },
-                session_lens = {
-                    -- If load_on_setup is set to false, one needs to eventually call `require("auto-session").setup_session_lens()` if they want to use session-lens.
-                    buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
-                    load_on_setup = true,
-                    theme_conf = { border = true },
-                    previewer = false,
-                },
-            })
-        end,
+        "folke/persistence.nvim",
+        event = "BufReadPre",                                   -- this will only start session saving when an actual file was opened
+        opts = {
+            dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
+            options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
+            pre_save = nil,                                     -- a function to call before saving the session
+            save_empty = false,                                 -- don't save if there are no open file buffers
+            -- add any custom options here
+        }
     },
+    -- {
+    --     "rmagatti/auto-session",
+    --     config = function()
+    --         require("auto-session").setup({
+    --             auto_session_enabled = true,
+    --             auto_save_enabled = true,
+    --             auto_restore_enabled = false,
+    --             pre_save_cmds = { "NvimTreeClose", "OutlineClose", },
+    --             -- post_restore_cmds = { "NvimTreeOpen", },
+    --             session_lens = {
+    --                 -- If load_on_setup is set to false, one needs to eventually call `require("auto-session").setup_session_lens()` if they want to use session-lens.
+    --                 buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
+    --                 load_on_setup = true,
+    --                 theme_conf = { border = true },
+    --                 previewer = false,
+    --             },
+    --         })
+    --     end,
+    -- },
     -- {
     --     "folke/noice.nvim",
     --     config = function()
@@ -284,7 +296,7 @@ require("lazy").setup({
                 dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
                 dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
                 dashboard.button("p", "󰉋  Find project", ":Telescope projects <CR>"),
-                dashboard.button("s", "󰍣  Open session", ":lua require'auto-session.session-lens'.search_session()<CR>"),
+                -- dashboard.button("s", "󰍣  Open session", ":lua require'auto-session.session-lens'.search_session()<CR>"),
                 dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
                 dashboard.button("t", "󰦨  Find text", ":Telescope live_grep <CR>"),
                 dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
@@ -673,7 +685,7 @@ require("lazy").setup({
             })
             telescope.load_extension("projects")
             telescope.load_extension("undo")
-            telescope.load_extension("session-lens")
+            -- telescope.load_extension("session-lens")
         end,
     },
     "onsails/lspkind.nvim",
