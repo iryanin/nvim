@@ -60,9 +60,16 @@ require("lazy").setup({
             require("auto-session").setup({
                 auto_session_enabled = true,
                 auto_save_enabled = true,
-                auto_restore_enabled = true,
+                auto_restore_enabled = false,
                 pre_save_cmds = { "NvimTreeClose", "OutlineClose", },
-                post_restore_cmds = { "NvimTreeOpen", },
+                -- post_restore_cmds = { "NvimTreeOpen", },
+                session_lens = {
+                    -- If load_on_setup is set to false, one needs to eventually call `require("auto-session").setup_session_lens()` if they want to use session-lens.
+                    buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
+                    load_on_setup = true,
+                    theme_conf = { border = true },
+                    previewer = false,
+                },
             })
         end,
     },
@@ -277,6 +284,7 @@ require("lazy").setup({
                 dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
                 dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
                 dashboard.button("p", "󰉋  Find project", ":Telescope projects <CR>"),
+                dashboard.button("s", "󰍣  Open session", ":lua require'auto-session.session-lens'.search_session()<CR>"),
                 dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
                 dashboard.button("t", "󰦨  Find text", ":Telescope live_grep <CR>"),
                 dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
