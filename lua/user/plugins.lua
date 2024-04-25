@@ -99,6 +99,7 @@ require("lazy").setup({
         "kyazdani42/nvim-tree.lua",
         config = function()
             require("nvim-tree").setup({
+                filters = { custom = { "^.git$" }, },
             })
         end,
     },
@@ -695,10 +696,17 @@ require("lazy").setup({
             })
             telescope.load_extension("projects")
             telescope.load_extension("undo")
+            -- telescope.load_extension("file_browser")
             -- telescope.load_extension("session-lens")
         end,
     },
-    "onsails/lspkind.nvim",
+    -- {
+    --     "nvim-telescope/telescope-file-browser.nvim",
+    --     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    -- },
+    {
+        "onsails/lspkind.nvim"
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
