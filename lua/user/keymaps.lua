@@ -140,7 +140,7 @@ map("n", "gk", ":lua vim.diagnostic.goto_prev()<CR>", opts)
 map("n", "gj", ":lua vim.diagnostic.goto_next()<CR>", opts)
 map("n", "<leader>f", ":lua vim.lsp.buf.format({async=true})<CR>", opts)
 --autosave
-map("n", "<leader>n", ":ASToggle<CR>", opts)
+-- map("n", "<leader>ss", ":ASToggle<CR>", opts)
 --markdown-preview
 map("n", "<leader>mp", ":MarkdownPreview<CR>", opts)
 

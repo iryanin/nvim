@@ -57,12 +57,12 @@ require("lazy").setup({
     -- Lua
     {
         "folke/persistence.nvim",
-        event = "BufReadPre",                                   -- this will only start session saving when an actual file was opened
+        event = "BufReadPre",                                             -- this will only start session saving when an actual file was opened
         opts = {
             dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
-            options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
-            pre_save = nil,                                     -- a function to call before saving the session
-            save_empty = false,                                 -- don't save if there are no open file buffers
+            options = { "buffers", "curdir", "tabpages", "winsize" },     -- sessionoptions used for saving
+            pre_save = nil,                                               -- a function to call before saving the session
+            save_empty = false,                                           -- don't save if there are no open file buffers
             -- add any custom options here
         }
     },
@@ -100,6 +100,16 @@ require("lazy").setup({
         config = function()
             require("nvim-tree").setup({
             })
+        end,
+    },
+    {
+        "antosha417/nvim-lsp-file-operations",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-tree.lua",
+        },
+        config = function()
+            require("lsp-file-operations").setup()
         end,
     },
     {
