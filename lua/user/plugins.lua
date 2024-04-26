@@ -41,6 +41,21 @@ require("lazy").setup({
         end,
     },
     {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({})
+        end,
+    },
+
+    {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    },
+    {
         "kylechui/nvim-surround",
         event = "VeryLazy",
         config = function()
@@ -425,7 +440,11 @@ require("lazy").setup({
             local luasnip = require("luasnip")
             local cmp = require("cmp")
             local lspkind = require("lspkind")
-            lspkind.init()
+            lspkind.init({
+                symbol_map = {
+                    Copilot = "",
+                },
+            })
             local compare = require("cmp.config.compare")
             local has_words_before = function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -453,6 +472,7 @@ require("lazy").setup({
                     },
                 },
                 sources = {
+                    { name = "copilot" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
@@ -462,6 +482,7 @@ require("lazy").setup({
                     format = lspkind.cmp_format({
                         mode = "symbol_text",
                         menu = {
+                            copilot = "[Copilot]",
                             buffer = "[Buffer]",
                             nvim_lsp = "[LSP]",
                             luasnip = "[LuaSnip]",
