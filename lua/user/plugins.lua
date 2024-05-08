@@ -40,21 +40,21 @@ require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({})
-        end,
-    },
-
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end
-    },
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({})
+    --     end,
+    -- },
+    --
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end
+    -- },
     {
         "kylechui/nvim-surround",
         event = "VeryLazy",
@@ -256,26 +256,48 @@ require("lazy").setup({
             vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
             dap.adapters.lldb = {
                 type = "executable",
-                command = "/opt/homebrew/opt/llvm/bin/lldb-vscode", -- adjust as needed, must be absolute path
+                command = "/opt/homebrew/opt/llvm/bin/lldb-dap", -- adjust as needed, must be absolute path
                 name = "lldb",
             }
+            dap.adapters.codelldb = {
+                type = 'server',
+                port = "${port}",
+                executable = {
+                    command = '/Users/ryan/.config/nvim/lua/user/codelldb/adapter/codelldb',
+                    args = { "--port", "${port}" },
+
+                    -- On windows you may have to uncomment this:
+                    -- detached = false,
+                }
+            }
             dap.configurations.cpp = {
+                -- {
+                --     name = "Launch",
+                --     type = "lldb",
+                --     request = "launch",
+                --     program = function()
+                --         return vim.fn.input("Path to executable: ",
+                --             vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":r"))
+                --     end,
+                --     cwd = "${workspaceFolder}",
+                --     stopOnEntry = true,
+                --     args = function()
+                --         local input = vim.fn.input("Input args: ")
+                --         return require("user.util").str2argtable(input)
+                --     end,
+                --     -- runInTerminal = false,
+                -- },
                 {
-                    name = "Launch",
+                    name = "Launch file",
                     type = "lldb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ",
-                            vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":r"))
+                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
                     end,
-                    cwd = "${workspaceFolder}",
-                    stopOnEntry = false,
-                    args = function()
-                        local input = vim.fn.input("Input args: ")
-                        return require("user.util").str2argtable(input)
-                    end,
-                    runInTerminal = true,
+                    cwd = '${workspaceFolder}',
+                    stopOnEntry = true,
                 },
+
             }
             dap.configurations.c = dap.configurations.cpp
             dap.configurations.rust = dap.configurations.cpp
@@ -294,13 +316,16 @@ require("lazy").setup({
         config = function()
             require("dapui").setup()
             local dap, dapui = require("dap"), require("dapui")
-            dap.listeners.after.event_initialized["dapui_config"] = function()
+            dap.listeners.before.attach.dapui_config = function()
                 dapui.open()
             end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
+            dap.listeners.before.launch.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated.dapui_config = function()
                 dapui.close()
             end
-            dap.listeners.before.event_exited["dapui_config"] = function()
+            dap.listeners.before.event_exited.dapui_config = function()
                 dapui.close()
             end
         end,
@@ -442,7 +467,7 @@ require("lazy").setup({
             local lspkind = require("lspkind")
             lspkind.init({
                 symbol_map = {
-                    Copilot = "",
+                    -- Copilot = "",
                 },
             })
             local compare = require("cmp.config.compare")
@@ -472,7 +497,8 @@ require("lazy").setup({
                     },
                 },
                 sources = {
-                    { name = "copilot" },
+                    -- { name = "copilot" },
+                    { name = 'nvim_lsp_signature_help' },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
@@ -484,7 +510,7 @@ require("lazy").setup({
                         maxwidth = 50,
                         ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                         menu = {
-                            copilot = "[Copilot]",
+                            -- copilot = "[Copilot]",
                             buffer = "[Buffer]",
                             nvim_lsp = "[LSP]",
                             luasnip = "[LuaSnip]",
@@ -575,19 +601,19 @@ require("lazy").setup({
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             lspconfig.clangd.setup({
-                root_dir = function(fname)
-                    return require("lspconfig.util").root_pattern(
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        "meson.build",
-                        "meson_options.txt",
-                        "build.ninja"
-                    )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-                        fname
-                    ) or require("lspconfig.util").find_git_ancestor(fname)
-                end,
+                -- root_dir = function(fname)
+                --     return require("lspconfig.util").root_pattern(
+                --         "Makefile",
+                --         "configure.ac",
+                --         "configure.in",
+                --         "config.h.in",
+                --         "meson.build",
+                --         "meson_options.txt",
+                --         "build.ninja"
+                --     )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+                --         fname
+                --     ) or require("lspconfig.util").find_git_ancestor(fname)
+                -- end,
                 cmd = {
                     "clangd",
                     "--background-index",
