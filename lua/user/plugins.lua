@@ -803,7 +803,8 @@ require("lazy").setup({
                     python = "time python3 -u",
                     typescript = "time deno run",
                     sh = "zsh",
-                    rust = "cd $dir && rustc $fileName && time $dir/$fileNameWithoutExt",
+                    -- rust = "cd $dir && rustc $fileName && time $dir/$fileNameWithoutExt",
+                    rust = "cd $dir && cargo build && time cargo run",
                     markdown =
                     "pandoc -f markdown --pdf-engine=xelatex --listings --template eisvogel $fileName -o $fileNameWithoutExt.pdf",
                 },
